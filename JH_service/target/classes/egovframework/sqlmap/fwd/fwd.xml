@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fwd">
+	
+	<select id="selectTargetUrl" parameterType="jhservice.fwd.service.FwdVO" resultType="egovMap">
+		
+		SELECT PM.SEQ_NO
+			,PM.URL_STR
+			,PM.DISC_STR
+			,PM.USE_YN
+		FROM prd_mst PM
+		WHERE PM.SEQ_NO = #{reqParam}
+	
+	</select>
+</mapper>
+
