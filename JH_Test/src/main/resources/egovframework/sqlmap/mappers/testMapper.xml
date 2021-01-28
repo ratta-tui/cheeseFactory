@@ -3,14 +3,48 @@
 
 <mapper namespace="egovframework.example.test.service.TestMapper">
 
+
+<!-- 여기가 쿼리문 작업해서 넣는 곳 매퍼   -->
+
+<!--parameterType : 입력될 데이터 // resultType : 쿼리후 결과를 위한 데이터 타입을 기재 하면 된다 여기는 mybatis -->
+<!-- 파라미터의 값은 #, 파라미터명의 $ CDATA >> 쿼리랑 실제 코드랑 구분 하기 위한 것 .-->
 	<select id="selectTest" resultType="TestVO" >
 		SELECT
 		*
 		FROM test
 		ORDER BY
 		testId DESC
-
 	</select>
-
-
+	<!-- 게시글 작성 쿼리 -->	
+	<insert id="insertTest" parameterType="TestVO">
+		<![CDATA[
+			INSERT INTO test(testTitle, testContent, testName, testDate)
+			VALUES(#{testTitle}, #{testContent}, '진훈', now())
+		]]>	
+	</insert>
+		
+	<!-- 게시글 조회 시 디테일 뷰 보여주기 -->
+	<select id="selectDetail" parameterType="egovframework.example.test.domain.TestVO" resultType="egovframework.example.test.domain.TestVO">
+		<![CDATA[
+			SELECT * 
+			FROM test
+			WHERE testId = #{testId}
+		]]>
+	</select>
+	
+	<!-- 게시글 업데이트, 수정 -->
+	<update id="updateTest">
+		<![CDATA[
+			UPDATE test set
+				testTitle = #{testTitle}
+				,testContent = #{testContent}
+			WHERE testId = #{testId}
+		]]>
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteTest">
+		DELETE FROM test
+		WHERE testId = #{testId}
+	</delete>
 </mapper> 

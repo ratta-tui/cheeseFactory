@@ -19,5 +19,29 @@ public class TestDAOService implements TestDAO {
 		TestMapper mapper = sqlSession.getMapper(TestMapper.class);
 		return mapper.selectTest(testVO);
 	}
-	
+
+	@Override
+	public void insertTest(TestVO testVO) throws Exception {
+		TestMapper mapper = sqlSession.getMapper(TestMapper.class);
+		mapper.insertTest(testVO);
+	}
+
+	@Override
+	public TestVO selectDetail(TestVO testVO) throws Exception {
+		TestMapper mapper = sqlSession.getMapper(TestMapper.class);
+		return mapper.selectDetail(testVO);
+	}
+
+	@Override
+	public void updateTest(TestVO testVO) throws Exception {
+		TestMapper mapper = sqlSession.getMapper(TestMapper.class);
+		mapper.updateTest(testVO);
+	}
+
+	@Override
+	public void deleteTest(TestVO testVO) throws Exception {
+		TestMapper mapper = sqlSession.getMapper(TestMapper.class);
+		mapper.deleteTest(testVO);
+	}
+
 }
