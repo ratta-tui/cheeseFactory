@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import egovframework.example.test.domain.Search;
 import egovframework.example.test.domain.TestVO;
 import egovframework.example.test.service.TestMapper;
 
@@ -14,11 +15,13 @@ public class TestDAOService implements TestDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
-	public List<TestVO> selectTest(TestVO testVO) throws Exception {
+
+	@Override
+	public List<TestVO> selectTest(Search search) throws Exception {
 		TestMapper mapper = sqlSession.getMapper(TestMapper.class);
-		return mapper.selectTest(testVO);
+		return mapper.selectTest(search);
 	}
+
 
 	@Override
 	public void insertTest(TestVO testVO) throws Exception {
@@ -42,6 +45,12 @@ public class TestDAOService implements TestDAO {
 	public void deleteTest(TestVO testVO) throws Exception {
 		TestMapper mapper = sqlSession.getMapper(TestMapper.class);
 		mapper.deleteTest(testVO);
+	}
+
+	@Override
+	public int getBoardListCnt(Search search) throws Exception {
+		TestMapper mapper = sqlSession.getMapper(TestMapper.class);
+		return mapper.getBoardListCnt(search);
 	}
 
 }
