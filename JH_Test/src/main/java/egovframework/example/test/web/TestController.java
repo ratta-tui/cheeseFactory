@@ -35,7 +35,7 @@ public class TestController {
 		}
 		
 		//글 작성 버튼 클릭시 이동
-		@RequestMapping(value="/testInsert.do")
+		@RequestMapping(value="/insertTest.do")
 		public String write(@ModelAttribute("testVO") TestVO testVO, Model model, RedirectAttributes rttr) throws Exception {
 			testServiceImpl.insertTest(testVO);
 			//다시 testlist 주소 입력한 상태로 보내서 testlist.jsp 가 열리게끔 함. 
