@@ -21,9 +21,9 @@
 	<hr>
 	<div class="testlist" >
 	
-		<div class="container-fluid" >
 		
-			<form id="boardForm" name="boardForm" method="post" class="container-fluid" >
+		
+			<form id="boardForm" name="boardForm" method="post">
 				<table class="list_table">
 					<colgroup>
 						<col width="20%" />
@@ -64,7 +64,7 @@
 					</table>
 				</form>
 			</div>
-	</div>
+	
 	<div>
 		<button id="btn_write" type="button" class="btn_write">글작성</button>
 	</div>

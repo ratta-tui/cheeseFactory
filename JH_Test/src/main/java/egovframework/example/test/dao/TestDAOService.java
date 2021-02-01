@@ -52,5 +52,7 @@ public class TestDAOService implements TestDAO {
 		TestMapper mapper = sqlSession.getMapper(TestMapper.class);
 		return mapper.getBoardListCnt(search);
 	}
+	
+	
 
 }

@@ -49,8 +49,8 @@
 	<!--게시글 삽입 -->
 	<insert id="insertTest" parameterType="TestVO">
 		<![CDATA[
-		INSERT INTO test(testTitle, testContent, testName, testDate)
-		VALUES(#{testTitle}, #{testContent}, #{testName}, now())
+		INSERT INTO test(testTitle, testContent, testName, testDate, fileName)
+		VALUES(#{testTitle}, #{testContent}, #{testName}, now(), #{fileName})
 		]]>
 	</insert>
 
@@ -69,8 +69,8 @@
 	<update id="updateTest">
 		update test set
 		testTitle = #{testTitle}
-		,testContent =
-		#{testContent}
+		,testContent =#{testContent}
+		,fileName = #{fileName}
 		where
 		testId = #{testId}
 	</update>

@@ -34,17 +34,13 @@
 				<h1>글쓰기</h1>
 			</thead>
 			<tbody>
+				<!-- enctype="multipart/form-data" 이 부분을 사용해 줘야지만 파일을 전송할 수 있다. -->
 				<form id="form_test" action="insertTest.do" method="post"
-					encType="multiplart/form-data">
+					encType="multipart/form-data">
 					<tr>
 						<th>제목:</th>
 						<td><input type="text" placeholder="제목을 입력하세요. "
 							name="testTitle" class="form-control" /></td>
-					</tr>
-					<tr>
-						<th>작성자:</th>
-						<td><input type="text" placeholder="이름을 입력하세요. "
-							name="testName" class="form-control" /></td>
 					</tr>
 					<tr>
 						<th>내용:</th>
@@ -52,10 +48,19 @@
 								class="form-control" style="height: 200px;"></textarea></td>
 					</tr>
 					<tr>
-						<td colspan="2">
-							<button id="btn_register" type="button" class="btn_register">등록</button>
-							<button id="btn_previous" type="button" class="btn_previous">이전</button>
+						<th>작성자</th>
+						<td><textarea placeholder="이름을 입력하세요 . " name="testName"
+								class="form-control" style="height: 30px;"></textarea></td>
 					</tr>
+					<tr>
+						<th>첨부파일:</th>
+						<td><input type="file" name="uploadFile"></td>
+					</tr>
+				<tr>
+					<td colspan="2">
+						<button id="btn_register" type="button" class="btn_register">등록</button>
+						<button id="btn_previous" type="button" class="btn_previous">이전</button>
+				</tr>
 
 				</form>
 			</tbody>
@@ -68,12 +73,16 @@
 	//글쓰기
 
 	$(document).on('click', '#btn_register', function(e) {
+
 		$("#form_test").submit();
+
 	});
 
 	//이전 클릭 시 testList로 이동
 	$("#btn_previous").click(function javascript_onclikc() {
+
 		$(location).attr('href', 'testList.do');
+
 	});
 </script>
 </html>

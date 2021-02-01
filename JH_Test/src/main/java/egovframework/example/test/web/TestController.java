@@ -1,13 +1,18 @@
 package egovframework.example.test.web;
 
+import java.io.File;
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import egovframework.example.test.domain.Search;
@@ -39,13 +44,11 @@ public class TestController {
 
 	// 글 목록 리스트, 페이징, 검색
 	@RequestMapping(value = "/testList.do")
-	public String testListDo(Model model
-			,@RequestParam(required = false, defaultValue = "1") int page
-			,@RequestParam(required = false, defaultValue = "1") int range
-			,@RequestParam(required = false, defaultValue = "testTitle") String searchType
-			,@RequestParam(required = false) String keyword,
-			@ModelAttribute("search") Search search
-			) throws Exception {
+	public String testListDo(Model model, @RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			@RequestParam(required = false, defaultValue = "testTitle") String searchType,
+			@RequestParam(required = false) String keyword, @ModelAttribute("search") Search search) throws Exception {
+
 
 		//검색
 		model.addAttribute("search", search);
@@ -74,6 +77,18 @@ public class TestController {
 	// 글 작성 버튼 구현
 	@RequestMapping(value = "/insertTest.do")
 	public String write(@ModelAttribute("testVO") TestVO testVO, RedirectAttributes rttr) throws Exception {
+		
+		// 파일 업로드 처리
+				String fileName = null;
+				MultipartFile uploadFile = testVO.getUploadFile();
+				if (!uploadFile.isEmpty()) {
+					String originalFileName = uploadFile.getOriginalFilename();
+					String ext = FilenameUtils.getExtension(originalFileName); // 확장자 구하기
+					UUID uuid = UUID.randomUUID(); // UUID 구하기
+					fileName = uuid + "." + ext;
+					uploadFile.transferTo(new File("C:\\upload\\" + fileName));
+				}
+				testVO.setFileName(fileName);
 		testServiceImpl.insertTest(testVO);
 		return "redirect:testList.do";
 	}
@@ -96,6 +111,21 @@ public class TestController {
 	// 수정하기
 	@RequestMapping(value = "/updateTest.do")
 	public String updateTest(@ModelAttribute("testVO") TestVO testVO, HttpServletRequest request) throws Exception {
+		// 파일 업로드 처리
+		String fileName = null;
+		MultipartFile uploadFile = testVO.getUploadFile();
+		if (!uploadFile.isEmpty()) {
+			String originalFileName = uploadFile.getOriginalFilename();
+			String ext = FilenameUtils.getExtension(originalFileName); // 확장자 구하기
+			UUID uuid = UUID.randomUUID(); // UUID 구하기
+			fileName = uuid + "." + ext;
+			uploadFile.transferTo(new File("C:\\upload\\" + fileName));
+		}
+		testVO.setFileName(fileName);
+
+		
+		
+		
 		testServiceImpl.updateTest(testVO);
 		return "redirect:testList.do";
 	}

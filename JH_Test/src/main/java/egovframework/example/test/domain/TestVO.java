@@ -1,5 +1,7 @@
 package egovframework.example.test.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class TestVO {
 	
 	private static final long serialVersionUID = 1L;
@@ -9,7 +11,20 @@ public class TestVO {
 	private String testContent;
 	private String testName;
 	private String testDate;
-	
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
+	}
+	private String fileName;
+	private MultipartFile uploadFile;
 	
 	public int getTestId() {
 		return testId;
