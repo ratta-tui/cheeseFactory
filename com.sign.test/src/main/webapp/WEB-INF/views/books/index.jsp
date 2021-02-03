@@ -31,7 +31,7 @@
         <div class="jumbotron">
             <h1>Books INDEX</h1>
             <p>views/books/index.jsp</p>
-            <a href="<c:url value="/books/new" />" class="btn btn-lg btn-primary">도서등록</a>
+            <a href="<c:url value="/books/newBook" />" class="btn btn-lg btn-primary">도서등록</a>
         </div>
         <div class="row">
         <c:forEach var="book" items="${books}" varStatus="status">
@@ -41,7 +41,9 @@
                   <div class="caption">
                       <h3> ${ book.title } <small>${ book.author }</small></h3>
                      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                      <a href="<c:url value='/books/edit/${ book.id }'/>" class="btn btn-primary">상세보기</a>
+                      <a href="<c:url value='/books/edit/${ book.id }'/>" class="btn btn-primary">수정</a>
+                      <a href="<c:url value='/books/delete/${ book.id}'/>" class="btn btn-danger">삭제</a>
+                      
                   </div>
               </div>
             </div>

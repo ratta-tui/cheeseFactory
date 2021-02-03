@@ -34,7 +34,7 @@ pageEncoding="UTF-8" session="false"%>
             <h1>Books NEW</h1>
             <p>views/books/newBook.jsp</p>
         </div>
-        <form action="<c:url value="/create" />" method="post">
+        <form action="<c:url value="/books" />" method="post" enctype="multipart/form-data">
             <div class="form-group form-group-lg">
                 <label class="control-label">도서 제목</label>
                 <input name="title" type="text" class="form-control">
@@ -43,9 +43,8 @@ pageEncoding="UTF-8" session="false"%>
                 <label class="control-label">저자</label>
                 <input name="author" type="text" class="form-control">
             </div>
-            <div class="form-group form-group-lg">
-                <label class="control-label">이미지</label>
-                <input name="image" type="text" class="form-control">
+             <div class="form-group form-group-lg">
+            	<input name="file" class="form-control-file" type="file">
             </div>
             <button type="submit" class="btn btn-lg btn-primary">전송</button>
         </form>
