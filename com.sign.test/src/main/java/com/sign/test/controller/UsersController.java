@@ -1,7 +1,10 @@
 package com.sign.test.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,14 +19,24 @@ public class UsersController {
     @Autowired
     private UserMapper userMapper;
     
-    @ResponseBody
+    
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String create(@ModelAttribute User user) {
         userMapper.insertUser(user);
         userMapper.insertAuthority(user.getEmail(), "ROLE_USER");
         return "redirect:/statics/login";
     }
+    
+    
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public String index(Model model) {
+        List<User> users = userMapper.selectUsers();
+        model.addAttribute("users", users);
+        return "admins/index";
+    }
 }
+
+
 /*
  * ResponseBody == 결과 값을 바로 html body로 뿌려주는 역할
  * 
@@ -34,5 +47,5 @@ public class UsersController {
  * 
  * 그런데, ResponseBody가 붙으면  요청이 들어오는 페이지로 
  * 리턴에 대한 값 그 자체를 보내서 나타내 준다! 
- *  다만 String으로 하는 redirect foward 는 쓸 수 있음! 그러면 ViewResolver에 따른 설정을 따름! 
+ *  다만 String으로 하는 redirect foward 는 쓸 수 있음! 그러면 ViewResolver에 따른 설정을 따름!  >> 노노노 걍 리스폰스 바디 어노테이션 끼고 다른 페이지 열 생각을 마셈 
  */

@@ -1,15 +1,25 @@
 package com.sign.test.vo;
 
-import org.springframework.stereotype.Repository;
-
+import java.util.List;
 
 public class User {
 	
 	int id;
 	
+	// @Email
 	String email;
 	
+	// @Size(min = 4, max=20)
 	String password;
+	
+	List<Authority> authorities;
+//	public boolean hasRole(String role) {
+//        for (Authority auth : authorities)
+//            if (auth.isRole(role))
+//                return true;
+//        return false;
+//    }
+
 
 	public int getId() {
 		return id;
@@ -34,11 +44,21 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	
+
+	public List<Authority> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(List<Authority> authorities) {
+		this.authorities = authorities;
+	}
 
 	@Override
 	public String toString() {
 		
-		return "User [id= "+ id + " , email =" + email + ", password= "+ password + "]";
+		return "User [id= "+ id + " , email =" + email + ", password= "+ password + ", + authorities = " + authorities + "]";
 	}
 	
 	

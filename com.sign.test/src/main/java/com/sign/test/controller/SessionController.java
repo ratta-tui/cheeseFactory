@@ -12,7 +12,7 @@ public class SessionController {
 	
 	@RequestMapping(value ="/login", method= RequestMethod.GET)
 	public String login() {
-		System.out.println("로그인 페이지 정상");
+		System.out.println("로그인 페이지 호출됨 ");
 		return "statics/login";
 	}
 
