@@ -13,12 +13,12 @@ public class User {
 	String password;
 	
 	List<Authority> authorities;
-//	public boolean hasRole(String role) {
-//        for (Authority auth : authorities)
-//            if (auth.isRole(role))
-//                return true;
-//        return false;
-//    }
+	public boolean hasRole(String role) {
+        for (Authority auth : authorities)
+            if (auth.isRole(role))
+                return true;
+        return false;
+    }
 
 
 	public int getId() {

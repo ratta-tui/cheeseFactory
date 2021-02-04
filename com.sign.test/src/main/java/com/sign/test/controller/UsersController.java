@@ -16,9 +16,9 @@ import com.sign.test.vo.User;
 @Controller
 public class UsersController {
 	
-    @Autowired
-    private UserMapper userMapper;
     
+    @Autowired
+    public UserMapper userMapper;
     
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String create(@ModelAttribute User user) {
@@ -28,12 +28,7 @@ public class UsersController {
     }
     
     
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String index(Model model) {
-        List<User> users = userMapper.selectUsers();
-        model.addAttribute("users", users);
-        return "admins/index";
-    }
+   
 }
 
 
