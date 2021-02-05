@@ -2,14 +2,18 @@ package com.sign.test.vo;
 
 import java.util.List;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+
 public class User {
 	
 	int id;
 	
-	// @Email
+	@Email
 	String email;
 	
-	// @Size(min = 4, max=20)
+	@Size(min = 4, max=20)
 	String password;
 	
 	List<Authority> authorities;

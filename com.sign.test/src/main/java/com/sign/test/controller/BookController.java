@@ -1,11 +1,19 @@
 package com.sign.test.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.javassist.compiler.MemberResolver;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,14 +24,23 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.sign.test.helper.Filehelper;
 import com.sign.test.mapper.BookMapper;
+import com.sign.test.mapper.ReviewMapper;
+import com.sign.test.mapper.UserMapper;
 import com.sign.test.vo.Book;
+import com.sign.test.vo.Review;
+import com.sign.test.vo.User;
 
 @Controller
 public class BookController {
 	
 	@Autowired
 	private BookMapper bookMapper;
-
+	
+	@Autowired
+	private UserMapper userMapper;
+	
+	@Autowired
+	private ReviewMapper reviewMapper;
 	
 	@RequestMapping(value = "/books", method = RequestMethod.GET)
 	public String index(Model model) {
@@ -70,6 +87,7 @@ public class BookController {
 		return "redirect:/books";
 	}
 	
+	//책 목록 삭제
 	@RequestMapping(value="/books/delete/{id}", method=RequestMethod.GET)
 	public String delete(@PathVariable int id) {
 		bookMapper.delete(id);
@@ -77,5 +95,29 @@ public class BookController {
 		return "redirect:/books";
 	}
 	
+	
+	@RequestMapping(value = "/books/{id}", method = RequestMethod.GET)
+	public String show(@PathVariable int id, Model model, Principal principal) {
+	    Book book = bookMapper.getBook(id);
+	    model.addAttribute("book", book);
+	    
+	    
+	    List<Review> reviews = reviewMapper.getReviews(id);
+	    model.addAttribute("reviews", reviews);
+	    
+	    
+	    // 폼 태그에서 modelAttribute="review" 속성을 읽어올 수 있어야함.
+	    Review review = new Review();
+	    review.setBookId(id);
+//	    UserDetails principalemail = (UserDetails)authentication.getPrincipal();
+//	    String email = principalemail.getUsername();
+	    //이거도 안댐  Auten~~ 으로 받아와도 안댐   getname 에러 뜨면 일단 integer를 썻는지 부터 확인하자
+	    String email = principal.getName();
+	    int userId = userMapper.getUserIdByEmail(email);
+	    review.setUserId(userId);
+	    model.addAttribute("review", review);
+	    return "books/show";
+	}
+
 	
 }

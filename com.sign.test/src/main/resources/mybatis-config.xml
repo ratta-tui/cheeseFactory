@@ -15,6 +15,12 @@
             </dataSource>
         </environment>
     </environments>
+    
+    <settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	
+	</settings>
+	
     <mappers>
         <mapper resource="org/mybatis/example/BlogMapper.xml" />
     </mappers> -->

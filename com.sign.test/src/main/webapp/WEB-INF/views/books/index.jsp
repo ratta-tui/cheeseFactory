@@ -17,7 +17,11 @@
 					<div class="card-body">
 						<h3 class="card-title">${ book.title }</h3>
 						<p class="card-text">this is the Amumal DaeJanChi You know what i'm saying? I truely want Tuaigeun</p>
-						<a href="#" class="btn btn-primary">상세보기</a>
+						
+						
+						
+						<a id="user_id" href="<c:url value='/books/${book.id }' />" class="btn btn-primary">상세보기</a>
+					
 						<s:authorize access="hasRole('ADMIN')">
 							<a href="<c:url value='/books/edit/${ book.id }' />"
 								class="btn btn-lg btn-default">수정</a>

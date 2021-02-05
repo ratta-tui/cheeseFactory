@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <%@ page pageEncoding="utf-8"%>
+<link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet">
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<c:url var="rootUrl" value="/" />
@@ -15,12 +16,11 @@
 		
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="nav navbar-nav navbar-left">
-				<li><a href="<c:url value='/books'/>">도서</a></li>
+				<li><a href="<c:url value='/books'/>" />도서</a></li>
 			 	<sec:authorize access="hasRole('ADMIN')">
 			 	<li class="nav-item"><a class="nav-link" href="<c:url value='/admin'/>">관리</a></li>
   				</sec:authorize>
 			</ul>
-			
 			
 			<!-- 로그인 버튼 -->
 			<sec:authorize access = "isAnonymous()">

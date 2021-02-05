@@ -13,6 +13,7 @@ import com.sign.test.vo.User;
 
 
 public interface UserMapper {
+	
     @Insert("INSERT INTO users (email, password, enabled) "
             + "VALUES (#{email}, #{password}, true)")
     public boolean insertUser(User user);
@@ -46,5 +47,9 @@ public interface UserMapper {
             @Result(property = "authorities", column = "email", javaType = List.class, many = @Many(select = "selectAuthority"))
     })
 	public User selectUserById(int userId);
+    
+    //책 리뷰 위해서 유저 이메일로 id 가져오기
+    @Select("select id from users where email = #{email}")
+    public int getUserIdByEmail(String email);
 	
 }
